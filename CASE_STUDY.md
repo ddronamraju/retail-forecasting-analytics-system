@@ -45,6 +45,31 @@ The anomaly detection module produces:
 In a production environment, this logic would run across all series using distributed
 compute and feed anomaly summaries into alerting systems and KPI dashboards.
 
+## 5. Price Elasticity & Promotion Impact
+
+This component estimates how demand responds to changes in price and promotion status
+for a given store–department.
+
+A simple log-linear model is used:
+
+\[
+\log(\text{sales}) = \beta_0 + \beta_1 \log(\text{price}) + \beta_2 \cdot \text{promo} + \epsilon
+\]
+
+Where:
+- β₁ represents **price elasticity** (typically negative).
+- β₂ captures the **multiplicative uplift** from promotions.
+
+Outputs:
+- Elasticity estimate (e.g., –1.3 → 1% price increase leads to ~1.3% decrease in demand).
+- Promo uplift (e.g., 30–40% higher demand during promo weeks).
+- Demand curve plots relating price to weekly sales.
+
+In the broader system, these elasticity and uplift estimates feed into:
+- Price and promo scenario tools.
+- Margin and revenue optimization analyses.
+- Feature engineering for downstream forecasting models.
+
 ## 4. Additional Modules
 
 Short descriptions of:
