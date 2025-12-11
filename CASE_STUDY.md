@@ -28,6 +28,23 @@ time series using Prophet. It provides:
 
 (Plots and details are referenced from the baseline Prophet module.)
 
+## 4. Sales Anomaly Detection
+
+This component analyzes weekly sales for each store–department combination and flags
+statistically unusual spikes and dips using rolling statistics and z-scores.
+
+It is used to:
+- Monitor demand behavior relative to recent history.
+- Identify holiday and promotion-driven spikes.
+- Detect potential stockouts or operational issues when sales drop unusually.
+
+The anomaly detection module produces:
+- A time series chart with anomalies highlighted.
+- A table of anomalous weeks with z-scores and holiday indicators.
+
+In a production environment, this logic would run across all series using distributed
+compute and feed anomaly summaries into alerting systems and KPI dashboards.
+
 ## 4. Additional Modules
 
 Short descriptions of:
