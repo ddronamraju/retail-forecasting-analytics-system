@@ -70,6 +70,27 @@ In the broader system, these elasticity and uplift estimates feed into:
 - Margin and revenue optimization analyses.
 - Feature engineering for downstream forecasting models.
 
+## 6. SKU Segmentation
+
+To support differentiated forecasting and inventory strategies, SKUs are segmented
+based on their demand behavior:
+
+- Average weekly sales level
+- Volatility (coefficient of variation)
+- Trend (difference between late and early weeks)
+- Seasonality strength (variance across weeks of the year)
+
+These features are clustered using K-Means to produce groups such as:
+- Stable high performers
+- Volatile seasonal SKUs
+- Declining SKUs
+- Low-volume noisy SKUs
+
+The resulting segments can be used to:
+- Choose forecasting model families per cluster.
+- Calibrate safety stock levels differently by segment.
+- Prioritize SKUs for promotion, markdown, or assortment review.
+
 ## 4. Additional Modules
 
 Short descriptions of:
