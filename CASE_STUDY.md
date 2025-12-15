@@ -102,7 +102,10 @@ This layer is designed to be production-compatible:
 - reusable function interface
 - persistence to Parquet for downstream batch scoring and training
 
-
+# 8. LightGBM model
+- LightGBM model as the primary forecaster
+- Time-based validation and WAPE
+- Saved model artifact and readiness for API/batch scoring
 ## 4. Additional Modules
 
 Short descriptions of:
