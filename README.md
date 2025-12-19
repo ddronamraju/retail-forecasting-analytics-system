@@ -1,4 +1,4 @@
-# Retail Forecasting Analytics System
+# Adaptive Forecasting Ensemble
 
 > **Production-ready ML ensemble for weekly retail demand forecasting with holiday spike handling and cold-start capability**
 
@@ -41,7 +41,7 @@ Store  Dept  Prophet  Ridge  LightGBM  Ensemble  Ridge_Wt  LGBM_Wt
 ## 🏗️ Project Structure
 
 ```
-retail-forecasting-analytics-system/
+adaptive-forecasting-ensemble/
 ├── data/                          # Walmart recruiting dataset
 │   ├── train.csv                  # Historical weekly sales
 │   ├── test.csv                   # Test set
@@ -81,8 +81,8 @@ retail-forecasting-analytics-system/
 
 ```bash
 # Clone repository
-git clone <repository-url>
-cd retail-forecasting-analytics-system
+git clone https://github.com/YOUR_USERNAME/adaptive-forecasting-ensemble.git
+cd adaptive-forecasting-ensemble
 
 # Create virtual environment
 python -m venv venv
@@ -113,7 +113,7 @@ jupyter notebook 4_ensemble_forecast.ipynb     # ~4 min
 
 ```bash
 cd modules/scenario_simulator
-streamlit run simple_dashboard.py
+streamlit run forecast_dashboard.py
 ```
 
 Visit `http://localhost:8501` in your browser.

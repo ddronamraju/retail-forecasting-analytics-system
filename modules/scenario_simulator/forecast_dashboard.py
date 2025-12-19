@@ -21,20 +21,11 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS - removed conflicting styles that hide metrics
 st.markdown("""
     <style>
-    .metric-card {
-        background-color: #f0f2f6;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-    }
-    .stMetric {
-        background-color: #ffffff;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    .main > div {
+        padding-top: 2rem;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -272,12 +263,13 @@ def main():
             height = bar.get_height()
             ax.text(bar.get_x() + bar.get_width()/2., height,
                    f'{wape:.2f}%',
-                   ha='center', va='bottom', fontsize=12, fontweight='bold')
+                   ha='center', va='bottom', fontsize=10, fontweight='bold')
         
-        ax.set_ylabel('Average WAPE (%)', fontsize=13, fontweight='bold')
-        ax.set_title('Average Model Performance Across All Entities', fontsize=15, fontweight='bold')
+        ax.set_ylabel('Average WAPE (%)', fontsize=11, fontweight='bold')
+        ax.set_title('Average Model Performance Across All Entities', fontsize=12, fontweight='bold')
         ax.grid(alpha=0.3, axis='y', linestyle='--')
         ax.set_ylim(0, max(wapes) * 1.15)
+        ax.tick_params(axis='both', which='major', labelsize=10)
         
         plt.tight_layout()
         st.pyplot(fig)
@@ -335,34 +327,35 @@ def main():
     weeks = np.arange(len(selected_result['Actuals']))
     
     ax.plot(weeks, selected_result['Actuals'], 'o-', label='Actual', 
-            linewidth=3, markersize=10, color='black', zorder=5)
+            linewidth=2.5, markersize=8, color='black', zorder=5)
     ax.plot(weeks, selected_result['Ensemble_Preds'], 's-', 
             label=f"Ensemble (WAPE: {selected_result['Ensemble_WAPE']:.1f}%)", 
-            alpha=0.9, linewidth=2.5, markersize=8, color='#FFD700')
+            alpha=0.9, linewidth=2, markersize=7, color='#FFD700')
     ax.plot(weeks, selected_result['Ridge_Preds'], '^-', 
             label=f"Ridge (WAPE: {selected_result['Ridge_WAPE']:.1f}%)", 
-            alpha=0.7, linewidth=2, markersize=7, color='#66B2FF')
+            alpha=0.7, linewidth=1.8, markersize=6, color='#66B2FF')
     ax.plot(weeks, selected_result['LGBM_Preds'], 'v-', 
             label=f"LightGBM (WAPE: {selected_result['LGBM_WAPE']:.1f}%)", 
-            alpha=0.7, linewidth=2, markersize=7, color='#99FF99')
+            alpha=0.7, linewidth=1.8, markersize=6, color='#99FF99')
     
     if selected_result['Prophet_Preds'] is not None:
         ax.plot(weeks, selected_result['Prophet_Preds'], 'd-', 
                 label=f"Prophet (WAPE: {selected_result['Prophet_WAPE']:.1f}%)", 
-                alpha=0.6, linewidth=1.5, markersize=6, color='#FF9999')
+                alpha=0.6, linewidth=1.5, markersize=5, color='#FF9999')
     
     # Mark holidays
     for i, is_holiday in enumerate(selected_result['IsHoliday']):
         if is_holiday:
             ax.axvline(x=i, color='red', linestyle='--', alpha=0.3, linewidth=2)
-            ax.text(i, ax.get_ylim()[1] * 0.98, '🎄', ha='center', fontsize=14)
+            ax.text(i, ax.get_ylim()[1] * 0.98, '🎄', ha='center', fontsize=12)
     
     ax.set_title(f'Store {selected_store}, Dept {selected_dept}: Test Set Predictions (12 Weeks)', 
-                 fontsize=16, fontweight='bold')
-    ax.set_xlabel('Week Number', fontsize=13)
-    ax.set_ylabel('Weekly Sales ($)', fontsize=13)
-    ax.legend(loc='upper left', fontsize=11, framealpha=0.95)
+                 fontsize=13, fontweight='bold')
+    ax.set_xlabel('Week Number', fontsize=11)
+    ax.set_ylabel('Weekly Sales ($)', fontsize=11)
+    ax.legend(loc='upper left', fontsize=9, framealpha=0.95)
     ax.grid(alpha=0.3, linestyle=':', linewidth=0.8)
+    ax.tick_params(axis='both', which='major', labelsize=9)
     
     plt.tight_layout()
     st.pyplot(fig)
